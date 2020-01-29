@@ -26,6 +26,11 @@ class MetronomeBox extends Component {
 
     handleSlide(speed) {
         this.setState({ metronomeSpeed: speed })
+        if (this.state.intervalID) {
+            clearInterval(this.state.intervalID);
+            this.setState({ intervalID: setInterval(this.beep, (60000 / speed)) });
+        }
+        
     }
 
     beep() {
