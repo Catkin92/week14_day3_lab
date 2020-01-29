@@ -1,3 +1,6 @@
+# Metronome
+You have been asked to create a metronome, much like the one that Google provides. Start with a range slider, play and stop buttons.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
