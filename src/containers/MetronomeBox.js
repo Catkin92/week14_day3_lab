@@ -6,8 +6,8 @@ class MetronomeBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            playing: false,
-            intervalID: 0
+            intervalID: 0,
+            metronomeSpeed: 600
         }
         this.onPlay = this.onPlay.bind(this);
         this.beep = this.beep.bind(this);
@@ -15,11 +15,8 @@ class MetronomeBox extends Component {
     }
 
     onPlay() {
-        this.setState(prevState => {
-            return { playing: !prevState.playing }
-        })
         if (!this.state.intervalID) {
-            this.setState({ intervalID: setInterval(this.beep, 500) });
+            this.setState({ intervalID: setInterval(this.beep, this.state.metronomeSpeed) });
         }
         else {
             clearInterval(this.state.intervalID);
@@ -28,8 +25,9 @@ class MetronomeBox extends Component {
     }
 
     handleSlide(speed) {
-
-        console.log(speed);
+        const newSpeed = 60000 / speed;
+        this.setState({ metronomeSpeed: newSpeed })
+        console.log(speed)
     }
 
     beep() {

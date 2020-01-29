@@ -11,6 +11,7 @@ const MetronomePlayer = ({onPlay, handleSlide}) => {
         <>
         <button onClick={onPlay}>Click</button>
         <input type="range" min="40" max="218" onChange={onChange}></input>
+        
         </>
     )
 
