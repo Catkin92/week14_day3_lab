@@ -51,10 +51,16 @@ class MetronomeBox extends Component {
 
     render() {
         return (
-            <>
-            <MetronomeSound sounds={this.state.sounds} handleSoundSelected={this.handleSoundSelected}/>
-            <MetronomePlayer onPlay={this.onPlay} handleSlide={this.handleSlide} metronomeSpeed={this.state.metronomeSpeed}/>
-            </>
+            <div className="metronome">
+                <h1>METRONOME BY CAT AND PAOLO</h1>
+                <MetronomePlayer 
+                    onPlay={this.onPlay} 
+                    handleSlide={this.handleSlide} 
+                    metronomeSpeed={this.state.metronomeSpeed}
+                    imgSrc={!this.state.intervalID ? "./play.png" : "./pause.png"}
+                    speed={this.state.metronomeSpeed}/>
+                <MetronomeSound sounds={this.state.sounds} handleSoundSelected={this.handleSoundSelected}/>
+            </div>
         )
 
     }
