@@ -11,7 +11,7 @@ const MetronomePlayer = ({onPlay, handleSlide, metronomeSpeed, imgSrc}) => {
         <div className="player">
             <button onClick={onPlay}><img src={imgSrc}></img></button>
             <div className="metro-slider">
-                <input type="range" min="40" max="218" value={metronomeSpeed} onChange={onChange} className="slider"></input>
+                <input type="range" min="35" max="250" step="5" value={metronomeSpeed} onChange={onChange} className="slider"></input>
                 <p>{metronomeSpeed}</p>
             </div>
         </div>

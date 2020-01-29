@@ -17,29 +17,33 @@ class MetronomeBox extends Component {
         this.beep = this.beep.bind(this);
         this.handleSlide = this.handleSlide.bind(this);
         this.handleSoundSelected = this.handleSoundSelected.bind(this);
+        this.play = this.play.bind(this);
+        this.pause = this.pause.bind(this);
     }
 
     onPlay() {
-        if (!this.state.intervalID) {
-            this.setState({ intervalID: setInterval(this.beep, (60000 / this.state.metronomeSpeed)) });
-        }
-        else {
-            clearInterval(this.state.intervalID);
-            this.setState({ intervalID: 0 });
-        }
+        !this.state.intervalID ? this.play(this.state.metronomeSpeed) : this.pause();
     }
 
     handleSlide(speed) {
         this.setState({ metronomeSpeed: speed })
         if (this.state.intervalID) {
-            clearInterval(this.state.intervalID);
-            this.setState({ intervalID: setInterval(this.beep, (60000 / speed)) });
+            this.pause();
+            this.play(speed);
         }
-        
+    }
+
+    play(speed) {
+        this.setState({ intervalID: setInterval(this.beep, (60000 / speed)) });
+    }
+
+    pause() {
+        clearInterval(this.state.intervalID);
+        this.setState({ intervalID: 0 });
     }
 
     beep() {
-        var snd = new Audio(this.state.sounds[this.state.selectedSound].audio);
+        const snd = new Audio(this.state.sounds[this.state.selectedSound].audio);
         snd.play();
     }
 
@@ -47,19 +51,16 @@ class MetronomeBox extends Component {
         this.setState({ selectedSound: index });
     }
 
-
-
     render() {
         return (
             <div className="metronome">
                 <h1>METRONOME BY CAT AND PAOLO</h1>
-                <MetronomePlayer 
-                    onPlay={this.onPlay} 
-                    handleSlide={this.handleSlide} 
+                <MetronomePlayer
+                    onPlay={this.onPlay}
+                    handleSlide={this.handleSlide}
                     metronomeSpeed={this.state.metronomeSpeed}
-                    imgSrc={!this.state.intervalID ? "./play.png" : "./pause.png"}
-                    speed={this.state.metronomeSpeed}/>
-                <MetronomeSound sounds={this.state.sounds} handleSoundSelected={this.handleSoundSelected}/>
+                    imgSrc={!this.state.intervalID ? "./play.png" : "./pause.png"} />
+                <MetronomeSound sounds={this.state.sounds} handleSoundSelected={this.handleSoundSelected} />
             </div>
         )
 
